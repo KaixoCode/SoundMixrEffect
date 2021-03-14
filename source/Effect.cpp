@@ -41,7 +41,6 @@ namespace Effects
 		{
 			// Save the value of the volume knob.
 			nlohmann::json _json = nlohmann::json::object();
-			_json["type"] = "Volume";
 			_json["volume"] = m_Volume.Value();
 			return _json;
 		}
