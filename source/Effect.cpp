@@ -49,7 +49,7 @@ namespace Effects
 		void operator=(const nlohmann::json& json)
 		{
 			// Load the value of the volume knob.
-			m_Volume.Value(json.at("Volume").get<double>());
+			m_Volume.Value(json.at("volume").get<double>());
 		}
 
 	private:
