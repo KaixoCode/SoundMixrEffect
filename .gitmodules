@@ -1,0 +1,3 @@
+[submodule "EffectBase"]
+	path = EffectBase
+	url = https://github.com/KaixoCode/EffectBase.git
