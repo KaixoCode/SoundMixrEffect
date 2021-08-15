@@ -1,6 +1,7 @@
-#include <EffectBase.hpp>
+#define EFFECT_PLUGIN
+#include "Base.hpp"
 
-namespace Effects
+namespace SoundMixr
 {
 	/**
 	 * Simple Volume effect example.
@@ -31,30 +32,16 @@ namespace Effects
 			Div() = m_Volume;
 		}
 
-		float NextSample(float in, int c) 
+		float Process(float in, int c) override
 		{
 			// Multiply the incoming sample with the volume knob
 			return in * m_Volume.Value() * 0.01;
 		}
 
-		operator nlohmann::json() 
-		{
-			// Save the value of the volume knob.
-			nlohmann::json _json = nlohmann::json::object();
-			_json["volume"] = m_Volume.Value();
-			return _json;
-		}
-
-		void operator=(const nlohmann::json& json)
-		{
-			// Load the value of the volume knob.
-			m_Volume.Value(json.at("volume").get<double>());
-		}
-
 	private:
 
 		// The volume parameter
-		Effects::Parameter& m_Volume;
+		SoundMixr::Parameter& m_Volume;
 	};
 }
 
@@ -62,10 +49,7 @@ namespace Effects
  * MAKE SURE TO ADD THIS METHOD!!
  * This allows the Gui to create an instance of the effect.
  */
-extern "C"
+extern "C" DLLDIR void* NewInstance()
 {
-	DLLDIR void* NewInstance()
-	{
-		return new Effects::Volume();
-	}
+	return new Effects::Volume();
 }
